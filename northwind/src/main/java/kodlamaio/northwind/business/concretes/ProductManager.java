@@ -16,7 +16,7 @@ import kodlamaio.northwind.core.utilities.results.SuccessDataResult;
 import kodlamaio.northwind.core.utilities.results.SuccessResult;
 import kodlamaio.northwind.dataAccess.abstracts.ProductDao;
 import kodlamaio.northwind.entities.concretes.Product;
-import net.bytebuddy.asm.Advice.This;
+import kodlamaio.northwind.entities.dtos.ProductWithCategoryDto;
 
 @Service
 public class ProductManager implements ProductService{
@@ -92,6 +92,12 @@ public class ProductManager implements ProductService{
 	public DataResult<List<Product>> getAllSorted() {
 		Sort sort = Sort.by(Sort.Direction.DESC, "id"); // veritabanından veriyi çekerken hangi sıralamanın ASC/DSC mi olduğunu belirliyoruz.
 		return new SuccessDataResult<List<Product>>(this.productDao.findAll(sort), "Sıralama Başarılı");
+	}
+
+	@Override
+	public DataResult<List<ProductWithCategoryDto>> getProductWithCategoryDetails() {
+		
+		return new SuccessDataResult<List<ProductWithCategoryDto>>(this.productDao.getProductWithCategoryDetails(), "Data Listelendi");
 	}
 
 }
