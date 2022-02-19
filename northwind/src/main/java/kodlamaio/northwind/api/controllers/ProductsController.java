@@ -3,6 +3,7 @@ package kodlamaio.northwind.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import kodlamaio.northwind.entities.dtos.ProductWithCategoryDto;
 
 @RestController
 @RequestMapping("/api/products")
+@CrossOrigin
 public class ProductsController {
 	
 	private ProductService productService;
@@ -27,7 +29,7 @@ public class ProductsController {
 		super();
 		this.productService = productService;
 	}
-
+	
 	@GetMapping("/getall")///api/products/getall aslında url bu bunla gelirsen bu methodu tetiklersin
 	public DataResult<List<Product>> getAll(){
 		return this.productService.getAll();
@@ -41,6 +43,12 @@ public class ProductsController {
 	public DataResult<Product> getByProductName(@RequestParam String productName){
 		return this.productService.getByProductName(productName);
 	}
+	
+	@GetMapping("/getById")
+	public DataResult<Product> getByProductName(@RequestParam  int id){
+		return this.productService.getById(id);
+	}
+	
 	@GetMapping("/getByProductNameAndCategoryId")
 	public DataResult<Product> getByProductNameAndCategoryId(@RequestParam("productName") String productName, @RequestParam("categoryId") int categoryId){
 	

@@ -17,6 +17,7 @@ import kodlamaio.northwind.core.utilities.results.SuccessResult;
 import kodlamaio.northwind.dataAccess.abstracts.ProductDao;
 import kodlamaio.northwind.entities.concretes.Product;
 import kodlamaio.northwind.entities.dtos.ProductWithCategoryDto;
+import net.bytebuddy.asm.Advice.This;
 
 @Service
 public class ProductManager implements ProductService{
@@ -98,6 +99,12 @@ public class ProductManager implements ProductService{
 	public DataResult<List<ProductWithCategoryDto>> getProductWithCategoryDetails() {
 		
 		return new SuccessDataResult<List<ProductWithCategoryDto>>(this.productDao.getProductWithCategoryDetails(), "Data Listelendi");
+	}
+
+	@Override
+	public DataResult<Product> getById(int id) {
+		// TODO Auto-generated method stub
+		return new SuccessDataResult<Product>(this.productDao.findById(id));
 	}
 
 }
