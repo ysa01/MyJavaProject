@@ -2,6 +2,7 @@ package kodlamaio.northwind.api.controllers;
 
 
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.northwind.business.concretes.BitcoinManager;
 import kodlamaio.northwind.entities.concretes.AvgPrice;
+import kodlamaio.northwind.entities.concretes.MoneyPrice;
 
 
 @RestController
@@ -25,8 +27,13 @@ public class BourseWebService {
 	
 	@GetMapping(value = "/money/{symbl}")
 	public ResponseEntity<AvgPrice> getMoneyList( @PathVariable String symbl) {
-		AvgPrice avgPrice = bitcoinManager.getEmployees(symbl);
-		avgPrice.setSymbol(symbl);
-	 return ResponseEntity.ok(avgPrice);
+		
+		return ResponseEntity.ok(bitcoinManager.getEmployees(symbl));
+	}
+	@GetMapping(value = "/list")
+	public ResponseEntity<List<Object>> getMoney()
+	{
+		
+		return ResponseEntity.ok(bitcoinManager.getMoney());
 	}
 }
